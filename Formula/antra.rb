@@ -1,26 +1,26 @@
 class Antra < Formula
   desc "Stable HTTPS domains for local development — one command, no ports, no /etc/hosts"
   homepage "https://github.com/ifelse-codes/antra"
-  version "0.2.3"
+  version "0.6.2"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.arm?
       url "https://github.com/ifelse-codes/antra/releases/download/v#{version}/antra-aarch64-apple-darwin"
-      sha256 "acec700796df6e8a726900e699bd0d796143ecc198f26ed0c0dfc020c0f6a058"
+      sha256 "b42d49439f1cda804952bb064fbe36244db769cbad74868c96e74eefcdb798d3"
     else
       url "https://github.com/ifelse-codes/antra/releases/download/v#{version}/antra-x86_64-apple-darwin"
-      sha256 "d5b1e48be7511965014b79a948c153696734f36d54cb7d1a77c2db4c4bd17f99"
+      sha256 "33934480c3a00b074c946ad8cf6023565856496b35407b5dd3a373d7b462972c"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
       url "https://github.com/ifelse-codes/antra/releases/download/v#{version}/antra-aarch64-linux"
-      sha256 "d42715c4428220473ba3a1012af24d2f6517825bd77d46aa310c3fcf5fe09970"
+      sha256 "010bdaa8eb8726ad3b79b56633d750b971a52cc93a0274a71a5c6cd96a0209a0"
     else
       url "https://github.com/ifelse-codes/antra/releases/download/v#{version}/antra-x86_64-linux"
-      sha256 "52430242448b3610dc38d0bed67baa5f30798e05854aabf301fd8ee2632705e7"
+      sha256 "5fa2b5fa1cc5b7e60de2cae9b403179173d7578cf2b6dad48512481c17f20a8d"
     end
   end
 
@@ -30,12 +30,12 @@ class Antra < Formula
 
   def caveats
     <<~EOS
-      To trust the local CA for HTTPS (one-time setup):
+      To trust the local CA for HTTPS (one-time setup, no sudo on macOS):
 
-        antra trust
+        antra trust --user-level
 
-      This installs a local root CA into your system trust store.
-      It requires admin privileges and prompts before making changes.
+      This installs a local root CA into your login keychain.
+      Linux/Windows: run 'sudo antra trust' instead.
 
       Quick start:
 
